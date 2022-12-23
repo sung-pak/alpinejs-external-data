@@ -14,13 +14,9 @@
         items:[],
         get filteredItems() {
           return this.items.filter(ii => {
-
             if(this.search=='' || this.search.length<=1) return // start blank
-
             if(this.search=='--all'){ return ii.url } // display all
-
             return titleFromUrl(ii.url.toLowerCase()).includes(this.search.toLowerCase())
-
           });
         }
     }"
@@ -34,8 +30,8 @@
           <div class="inline relative left-8 bottom-1.5"><i>search entire set:</i> <code class="text-gray-400">--all</code></div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 ">
-      <template x-for="(item, index) in filteredItems">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2" :class="wallClass(filteredItems)">
+      <template x-for="(item, index) in filteredItems" :key="index">
         <img :src="item.url" :title="titleFromUrl(item.url)" class="rounded-lg"/>
       </template>
     </div>
@@ -45,12 +41,10 @@
 <script>
   window.onload = () => {
     setTimeout(() => {
-
       // itemsp from external js
       let datax = {
         itemz: itemsp
       }
-      
       // !! detail title can't change
       window.dispatchEvent(new CustomEvent('my-event', {detail: datax}));
     }, 100);
@@ -81,6 +75,15 @@
 
     return text;
   }
+
+  const wallClass =(items)=>{
+    let str = ''
+    if(items.length<7)
+        str = "lg:grid-cols-" + items.length
+
+    return str
+  }
+
 </script>
 </body>
 </html>
