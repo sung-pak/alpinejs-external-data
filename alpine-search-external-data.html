@@ -8,8 +8,7 @@
 </head>
 <body>
 <div class="flex flex-col  min-h-screen py-12 px-4 lg:p-0 bg-gray-50 sm:px-6 lg:px-8 bg-white dark:bg-zinc-800 dark:text-indigo-600">    
-  <div
-    x-data="{
+  <div x-data="{
         search: '--all',
         items:[],
         get filteredItems() {
@@ -19,8 +18,7 @@
             return titleFromUrl(ii.url.toLowerCase()).includes(this.search.toLowerCase())
           })
         }
-    }"
-    @my-event.window="items = $event.detail.itemz" >
+      }"  @my-event.window="items = $event.detail.itemz" >
 
     <div class="block relative mt-20">
       <h1 class="text-4xl mb-4 inline-block">Dall-E</h1> 
@@ -85,7 +83,7 @@
     return text
   }
 
-  const wallClass =(items)=>{
+  const wallClass = (items)=>{
     let str = ''
     if(items.length<7)
         str = "lg:grid-cols-" + items.length
